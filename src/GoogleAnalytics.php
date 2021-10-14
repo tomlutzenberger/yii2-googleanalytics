@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @noinspection PhpUnused
+ * @noinspection UnknownInspectionInspection
+ */
+
 namespace TomLutzenberger\GoogleAnalytics;
 
 use Yii;
@@ -15,6 +20,7 @@ use yii\web\View;
  */
 class GoogleAnalytics extends Widget
 {
+
     /**
      * @var string The id of the analytics property
      */
@@ -23,6 +29,7 @@ class GoogleAnalytics extends Widget
 
     /**
      * {@inheritdoc}
+     * @throws \yii\base\InvalidConfigException
      */
     public function run()
     {
@@ -39,8 +46,13 @@ class GoogleAnalytics extends Widget
             'async'    => true,
             'position' => View::POS_HEAD,
         ]);
-        $view->registerJs("window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}" .
-            "gtag('js', new Date());gtag('config', '{$this->gaId}');", View::POS_HEAD);
+        $view->registerJs(
+            <<<SCRIPT
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());gtag('config', '$this->gaId');
+SCRIPT
+            , View::POS_HEAD
+        );
 
         return '';
     }
