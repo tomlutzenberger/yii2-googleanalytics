@@ -37,7 +37,7 @@ class GoogleAnalytics extends Widget
             $this->gaId = Yii::$app->params['gaId'];
         }
 
-        if (!isset($this->gaId) || empty($this->gaId)) {
+        if (empty($this->gaId)) {
             return '';
         }
 
