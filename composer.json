@@ -29,12 +29,12 @@
   "require-dev": {
     "roave/security-advisories": "dev-latest"
   },
-  "provide": {
-    "bower-asset/jquery": "*",
-    "bower-asset/inputmask": "*",
-    "bower-asset/punycode": "*",
-    "bower-asset/yii2-pjax": "*"
-  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "TomLutzenberger\\GoogleAnalytics\\": "src"
